@@ -13,23 +13,30 @@ class MyHomePage extends StatelessWidget {
         title: Text('MobX'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Observer(builder: (_) {
-              return Text(
-                '${controller.counter}',
-                style: Theme.of(context).textTheme.headline4,
-              );
-            })
-          ],
+        child: Container(
+          margin: EdgeInsets.all(60),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextField(
+                decoration: InputDecoration(labelText: 'Name'),
+                onChanged: controller.getInputName,
+              ),
+              SizedBox(height: 20),
+              TextField(
+                decoration: InputDecoration(labelText: 'Last Name'),
+                onChanged: controller.getInputLastName,
+              ),
+              SizedBox(height: 20),
+              Observer(builder: (_) {
+                return Text('${controller.fullName}');
+              }),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: controller.increment,
+        onPressed: () {},
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),

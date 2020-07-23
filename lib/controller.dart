@@ -1,21 +1,27 @@
 import 'package:mobx/mobx.dart';
+// run flutter pub run build_runner build on terminal for that to work
+part 'controller.g.dart';
 
-class Controller {
-  var _counter = Observable(0);
-  int get counter => _counter.value;
-  set counter(int newValue) => _counter.value = newValue;
+class Controller = ControllerBase with _$Controller;
 
-  Action increment;
+abstract class ControllerBase with Store {
+  @observable
+  var name = '';
+  @observable
+  var lastName = '';
 
-  Controller() {
-    increment = Action(_increment);
+  // used to merge two properties in this class
+  @computed
+  String get fullName => '$name $lastName';
 
-    autorun((_) {
-      print(counter);
-    });
+  @action
+  void getInputName(String inputName) {
+    name = inputName;
   }
 
-  _increment() {
-    counter++;
+  @action
+  void getInputLastName(String inputLastName) {
+    lastName = inputLastName;
   }
+
 }
