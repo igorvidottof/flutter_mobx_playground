@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:provider/provider.dart';
+import 'package:get_it/get_it.dart';
 
 import 'controller.dart';
 
@@ -19,7 +19,7 @@ class BodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<Controller>(context, listen: false);
+    final controller = GetIt.I.get<Controller>();
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.all(60),
