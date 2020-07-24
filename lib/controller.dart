@@ -1,27 +1,34 @@
 import 'package:mobx/mobx.dart';
-// run flutter pub run build_runner build on terminal for that to work
+
+import './models/client.dart';
+
 part 'controller.g.dart';
 
-class Controller = ControllerBase with _$Controller;
+class Controller = _ControllerBase with _$Controller;
 
-abstract class ControllerBase with Store {
-  @observable
-  var name = '';
-  @observable
-  var lastName = '';
+abstract class _ControllerBase with Store {
+  var client = Client();
 
-  // used to merge two properties in this class
   @computed
-  String get fullName => '$name $lastName';
-
-  @action
-  void getInputName(String inputName) {
-    name = inputName;
+  bool get isValid {
+    return validateName() == null && validateEmail() == null;
   }
 
-  @action
-  void getInputLastName(String inputLastName) {
-    lastName = inputLastName;
+  String validateName() {
+    if (client.name == null || client.name.isEmpty)
+      return 'Please, provide a name';
+    if (client.name.length < 3)
+      return 'Your name should be at least 3 characters long';
+
+    return null;
   }
 
+  String validateEmail() {
+    if (client.email == null || client.email.isEmpty)
+      return 'Please, provide an email';
+    if (!client.email.contains('@'))
+      return 'This is not a valid email';
+
+    return null;
+  }
 }
