@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 
-import './home.dart';
-import 'controller.dart';
+import 'home_screen.dart';
 
 void main() {
-  GetIt getIt = GetIt.I;
-  getIt.registerSingleton<Controller>(Controller());
-
   runApp(MyApp());
 }
 
